@@ -1,0 +1,9 @@
+pygame>=2.5.0
+click==8.1.7
+pydantic==2.7.4
+tensorflow[and-cuda]==2.15.1
+tensorflow-probability==0.23.0
+tqdm==4.66.4
+numpy==1.26.4
+scipy>=1.15.0
+pybullet==3.2.7

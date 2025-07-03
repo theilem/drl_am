@@ -1,0 +1,95 @@
+{
+    "env": {
+        "velocity": 0.15,
+        "max_curvature": 30.0,
+        "timeout_dist": 30.0,
+        "substeps": 20,
+        "num_obstacles": 30,
+        "num_goals": 10,
+        "goal_radius": 0.05,
+        "obst_radius": 0.06,
+        "obst_shape": "rectangle",
+        "spline_degree": 3,
+        "spline_following_time": 0.4,
+        "checkpoints": 64,
+        "min_length": 1.0,
+        "max_length": 1.5,
+        "max_curvature_tol": 0.8,
+        "cost_tol_factor": 0.9,
+        "cost_mult_action_range": 1.0,
+        "cost_mult_curvature": 1.0,
+        "cost_mult_length": 1000.0,
+        "cost_mult_obstacle": 10000.0,
+        "cost_mult_outside": 1.0,
+        "reward_goal": 0.1,
+        "crash_penalty": 0.0,
+        "finish_reward": 1.0,
+        "move_penalty": 0.0
+    },
+    "trainer": {
+        "memory": {
+            "size": 1000000
+        },
+        "training_steps": 30000000,
+        "batch_size": 128,
+        "gamma": 0.97,
+        "actor_lr": {
+            "base": 3e-05,
+            "decay_rate": 1.0,
+            "decay_steps": 1000000
+        },
+        "critic_lr": {
+            "base": 0.0001,
+            "decay_rate": 1.0,
+            "decay_steps": 1000000
+        },
+        "tau": 0.005,
+        "policy_update_delay": 2048,
+        "train_per_step": 2,
+        "num_gyms": 50,
+        "entropy": 0.0002,
+        "am": {
+            "divergence": {
+                "n": 1024,
+                "sigma": 0.1,
+                "sigma_prime_factor": 2.0,
+                "epsilon": 1e-18,
+                "regularization": 0.0
+            },
+            "learning": {
+                "training_steps": 500000,
+                "batch_size_actor": 16,
+                "lr": {
+                    "base": 0.0001,
+                    "decay_rate": 1.0,
+                    "decay_steps": 1000000
+                }
+            }
+        }
+    },
+    "agent": {
+        "layer_size": 256,
+        "num_layers_pre_attention": 1,
+        "num_self_attention_layers": 0,
+        "num_attention_layers": 3,
+        "num_heads": 16,
+        "key_dim": 16,
+        "num_layers": 3,
+        "num_critics": 2
+    },
+    "evaluator": {
+        "num_states": 64,
+        "num_actions": 1024,
+        "num_parallel": 50,
+        "num_episodes": 1000
+    },
+    "logger": {
+        "loss_period": 200,
+        "evaluation_period": 1000,
+        "evaluation_start": 0,
+        "evaluation_episodes": 1,
+        "save_weights": 25000,
+        "log_episodes": true,
+        "batched_episode_period": 10000
+    }
+}

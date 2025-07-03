@@ -1,0 +1,132 @@
+{
+    "env": {
+        "timeout_steps": 100,
+        "delta_t": 0.5,
+        "angle_target": true,
+        "observe_ee_pose": false,
+        "use_obstacles": true,
+        "max_n_obstacles": 20,
+        "max_n_obstacles_sample": 30,
+        "min_r_obstacle": 0.2,
+        "max_r_obstacle": 0.5,
+        "reward_on_progress": true,
+        "reward_dist": 1.0,
+        "reward_rot": 0.3,
+        "penalty_action": 0.0,
+        "penalty_failed": 0.0,
+        "cost_mult_penetration": 1.0,
+        "cost_mult_joint_limits": 1.0,
+        "cost_mult_speed_limits": 1.0,
+        "cost_mult_action_bounds": 1.0,
+        "cartesian_linear_limit": 0.3,
+        "cartesian_rot_limit": 2.5,
+        "l0": 0.333,
+        "l2": 0.316,
+        "l4": 0.384,
+        "a4": 0.0825,
+        "l6": 0.088,
+        "l7": 0.107,
+        "max_joint_action": 1.5707963267948966,
+        "joint_limits": [
+            [
+                -2.7437,
+                2.7437
+            ],
+            [
+                -1.7837,
+                1.7837
+            ],
+            [
+                -2.9007,
+                2.9007
+            ],
+            [
+                -3.0421,
+                -0.1518
+            ],
+            [
+                -2.8065,
+                2.8065
+            ],
+            [
+                0.5445,
+                4.5169
+            ],
+            [
+                -3.0159,
+                3.0159
+            ]
+        ]
+    },
+    "trainer": {
+        "batch_size": 128,
+        "actor_lr": {
+            "decay_type": "linear",
+            "base": 3e-05,
+            "decay_rate": 0.0,
+            "decay_steps": 100000000
+        },
+        "critic_lr": {
+            "decay_type": "linear",
+            "base": 0.0001,
+            "decay_rate": 0.0,
+            "decay_steps": 100000000
+        },
+        "training_steps": 100000000,
+        "num_gyms": 50,
+        "rollout": {
+            "size": 10000
+        },
+        "rollout_epochs": 3,
+        "normalize_advantage": true,
+        "gamma": 0.97,
+        "lmbda": 0.9,
+        "epsilon": 0.2,
+        "entropy": 0.005,
+        "am": {
+            "divergence": {
+                "n": 1024,
+                "sigma": 0.1,
+                "sigma_prime_factor": 1.0,
+                "epsilon": 1e-18,
+                "regularization": 0.0
+            },
+            "learning": {
+                "training_steps": 1000000,
+                "batch_size_actor": 16,
+                "lr": {
+                    "decay_type": "constant",
+                    "base": 0.0001,
+                    "decay_rate": 1.0,
+                    "decay_steps": 1000000
+                }
+            }
+        }
+    },
+    "agent": {
+        "layer_size": 256,
+        "num_layers_pre_attention": 3,
+        "num_self_attention_layers": 0,
+        "num_attention_layers": 3,
+        "num_heads": 4,
+        "key_dim": 64,
+        "num_layers": 3,
+        "num_critics": 1
+    },
+    "logger": {
+        "loss_period": 100,
+        "floss_period": 1000,
+        "evaluation_period": 50000,
+        "evaluation_start": 0,
+        "evaluation_episodes": 1,
+        "save_weights": 100000,
+        "log_episodes": false,
+        "batched_episode_period": 10000
+    },
+    "evaluator": {
+        "num_states": 64,
+        "num_actions": 1024,
+        "num_parallel": 50,
+        "num_episodes": 1000
+    }
+}
