@@ -23,20 +23,15 @@ def get_actions(agent, obs, exploit=False, num_actions=1):
 
 
 @click.command()
-@click.argument("config", default=None, required=False)
+@click.argument("model", default=None, required=True)
 @click.option('--gpu', is_flag=True)
-@click.option('--gpu_id', default=None, help="GPU ID to use. 0 by default if --gpu flag is set.")
-@click.option('-p', '--params', nargs=2, multiple=True)
+@click.option('--gpu_id', default=None, help="GPU ID to use. 0 by default.")
+@click.option('-p', '--params', nargs=2, multiple=True, help="Overrides params in the config file. Provide 'path.to.param value'")
 @click.option('-s', default=800, help="Size of the window.")
 def main(**kwargs):
     setup_gpu(kwargs)
-    if kwargs["config"] is None:
-        # Get the dir in logs that was created last
-        logs = os.listdir("logs")
-        logs.sort()
-        kwargs["config"] = f"{logs[-1]}"
-        print(f"loading config from {kwargs['config']}")
-    config = find_config_model(kwargs["config"])
+
+    config = find_config_model(kwargs["model"])
     params: PathPlanningParams = load_config(PathPlanningParams, config, overrides=kwargs['params'])
     log_dir = config.rsplit("/", maxsplit=1)[0]
     size = int(kwargs["s"])

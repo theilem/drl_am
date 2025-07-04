@@ -21,7 +21,7 @@ class PathPlanningParams(BaseModel):
 @click.option('--gpu', is_flag=True)
 @click.option('--gpu_id', default=None, help="GPU ID to use. 0 by default.")
 @click.option('--generate', is_flag=True, help="Generate a config file instead.")
-@click.option('-p', '--params', nargs=2, multiple=True)
+@click.option('-p', '--params', nargs=2, multiple=True, help="Overrides params in the config file. Provide 'path.to.param value'")
 @click.option('--id', default=None, help="Run ID for logging.")
 @click.option('--feas', default=None, help="If set load feasibility policy instead of training it.")
 @click.option('--verbose', is_flag=True, help="Print network summary.")

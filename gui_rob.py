@@ -14,10 +14,10 @@ from train_rob import RobotArmParams
 
 
 @click.command()
-@click.argument("config", default=None, required=False)
+@click.argument("model", default=None, required=True)
 @click.option('--gpu', is_flag=True)
-@click.option('--gpu_id', default=None, help="GPU ID to use. 0 by default if --gpu flag is set.")
-@click.option('-p', '--params', nargs=2, multiple=True)
+@click.option('--gpu_id', default=None, help="GPU ID to use. 0 by default.")
+@click.option('-p', '--params', nargs=2, multiple=True, help="Overrides params in the config file. Provide 'path.to.param value'")
 @click.option('--rand', is_flag=True, help="Use random actions instead of the trained policy.")
 @click.option('--feas', is_flag=True, help="Use feasible actions only.")
 @click.option('--stochastic', is_flag=True, help="Use stochastic actions instead of deterministic.")
@@ -25,7 +25,7 @@ from train_rob import RobotArmParams
 def main(**kwargs):
     setup_gpu(kwargs)
 
-    config = find_config_model(kwargs["config"])
+    config = find_config_model(kwargs["model"])
     params: RobotArmParams = load_config(RobotArmParams, config, overrides=kwargs['params'])
     log_dir = config.rsplit("/", maxsplit=1)[0]
 
