@@ -1,23 +1,38 @@
-# Action Mapping for Deep Reinforcement Learning
+# Action Mapping for Reinforcement Learning in Continuous Environments with Constraints
 
 ### Official code for the paper:
-[Action Mapping for Reinforcement Learning in Continuous Environments with Constraints](https://openreview.net/forum?id=3oSauSj0Wk)
+
+**[Action Mapping for Reinforcement Learning in Continuous Environments with Constraints](https://openreview.net/forum?id=3oSauSj0Wk)**
 
 by Mirco Theile, Lukas Dirnberger, Raphael Trumpp, Marco Caccamo, Alberto Sangiovanni-Vincentelli.
 
-Accepted at RLC 2025.
+Accepted at **RLC 2025**.
 
 ## Action Mapping
-In Action Mapping (AM), we first train a feasibility policy that learns to generate all feasible actions for a given state in the environment. The feasibility policy is a neural network that predicts whether a given action is feasible in the environment. 
-After training the feasibility policy, we train an objective policy that learns to map the feasible actions to the optimal actions for the given state. 
-The objective policy is then trained using a standard reinforcement learning algorithm, such as Soft Actor-Critic (SAC) or Proximal Policy Optimization (PPO). It learns to choose among the feasible action that are learned by the feasibility policy.
-The overall architecture of AM is shown in the figure below.
+
+**Action Mapping (AM)** is a modular framework for reinforcement learning in constrained continuous action spaces. It separates *feasibility* and *optimality* into two distinct learning phases:
+
+1. **Feasibility Policy:**  
+   A neural network that learns to generate all feasible actions for a given state in the environment. It forms a map from a latent space to the set of feasible actions.
+
+2. **Objective Policy:**  
+   A standard RL policy (e.g., SAC or PPO) that learns to select optimal actions *among* those deemed feasible by the feasibility policy.
+
+This separation improves learning performance in environments with hard constraints.
+
+The architecture is illustrated below:  
 ![Action Mapping Architecture](am_arch.png)
 
+
 ## Overview
-This repository contains the code to train and visually evaluate two configurations:
-- **AM-SAC in a Path Planning Environment**: Action Mapping combined with Soft Actor-Critic in a spline-based path planning environment with non-holonomic constraints.
-- **AM-PPO in a Robotic Arm Environment**: Action Mapping combined with Proximal Policy Optimization in a robotic arm environment with joint limits, joint velocity constraints, and obstacles.
+
+This repository contains code to train and evaluate two configurations of the Action Mapping framework:
+
+- **AM-SAC in a Path Planning Environment:**  
+  Combines Action Mapping with Soft Actor-Critic in a spline-based path planning task subject to non-holonomic constraints.
+
+- **AM-PPO in a Robotic Arm Environment:**  
+  Combines Action Mapping with Proximal Policy Optimization in a robotic manipulation task with joint limits, joint velocity constraints, and obstacle avoidance.
 
 ## Installation
 To install the required packages, run:
